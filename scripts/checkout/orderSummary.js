@@ -5,9 +5,7 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { renderPaymentSummary } from "./paymentSummary.js";
 
 
-const today = dayjs();
-const deliveryDate = today.add(7,'days');
-deliveryDate.format('ddddd,MMMM D');
+
 import { deliveryOptions , getDeliveryOption} from "../../data/deliveryOptions.js";
 
 export function renderOrderSummary(){
@@ -152,6 +150,9 @@ document.querySelector('.js-order-summary')
   .forEach((link)=>{
    link.addEventListener('click',()=>{
        const productId = link.dataset.productId;
+
+ 
+
        const editingQuantity =  document.querySelector(`.js-cart-item-container-${productId}`);
 
        
@@ -173,6 +174,9 @@ document.querySelector('.js-order-summary')
    .forEach((link)=>{
     link.addEventListener('click',()=>{
       const productId=link.dataset.productId;
+
+
+      
       const container =  document.querySelector(`.js-cart-item-container-${productId}`);
 
       const quantitySelector =  document.querySelector(`.js-quantity-input-${productId}`);
@@ -214,6 +218,8 @@ document.querySelector('.js-order-summary')
 
 
    });
+
+
 
 }
 renderOrderSummary();
