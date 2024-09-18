@@ -1,4 +1,5 @@
 export let cart;
+
 loadFromStroage();
 export function loadFromStroage(){
    cart=JSON.parse(localStorage.getItem('cart'))  ||   [{

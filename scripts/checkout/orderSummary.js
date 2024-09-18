@@ -141,6 +141,7 @@ document.querySelector('.js-order-summary')
       document.querySelector('.js-newQuantity-header')
        .innerHTML = `${tq} Items`;
        renderPaymentSummary();
+       
         
     });
 
