@@ -11,9 +11,21 @@ import { deliveryOptions , getDeliveryOption} from "../../data/deliveryOptions.j
 export function renderOrderSummary(){
   let cartSummaryHtml = '';
 cart.forEach((cartItem )=>{
+    
     const productId = cartItem.productId;
-
+    if (!productId) {
+      console.error('cartItem has no productId', cartItem);
+      return;  // Skip this item if productId is missing
+    }
+  
     const matchingProduct = getProduct(productId);
+    if (!matchingProduct) {
+      console.error(`No product found for productId: ${productId}`);
+      return;  // Skip this item if the product is not found
+    }
+  
+
+    
 
     const deliveryOptionId = cartItem.deliveryOptionId;
     const deliveryOption = getDeliveryOption(deliveryOptionId);
