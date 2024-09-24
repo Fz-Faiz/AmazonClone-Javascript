@@ -143,6 +143,7 @@ loadProductsFetch(),then(()=>{
 });
 
 */
+
 export function loadProducts(fun = () => {}){
  const xhr =new XMLHttpRequest();
  xhr.addEventListener('load',()=>{
@@ -164,6 +165,7 @@ export function loadProducts(fun = () => {}){
  xhr.send();
 }
 loadProducts();
+
 /*
 export const products = [
   {
