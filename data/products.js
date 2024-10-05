@@ -149,29 +149,41 @@ loadProductsFetch(),then(()=>{
 
 */
 
-export function loadProducts(fun = () => {}){
- const xhr =new XMLHttpRequest();
- xhr.addEventListener('load',()=>{
-   products = JSON.parse(xhr.response).map((productDetails)=>{
-     if(productDetails.type === 'clothing'){
-       return new Clothing(productDetails); 
-     }
-     if(productDetails.type === 'appliances'){
-       return new Appliances(productDetails);
-     }
-     return new Product(productDetails);
-   
-   });
-   
-   fun();
 
- });
- xhr.addEventListener('error',(error)=>{
-  console.log('Unexpected error. Please try again later.');
- });
- xhr.open('GET','https://supersimplebackend.dev/products');
- xhr.send();
+
+export function loadProducts(fun = () => {}) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    try {
+      const productsData = JSON.parse(xhr.response);
+
+      products = productsData.map((productDetails) => {
+        switch (productDetails.type) {
+          case 'clothing':
+            return new Clothing(productDetails);
+          case 'appliances':
+            return new Appliances(productDetails);
+          default:
+            return new Product(productDetails);
+        }
+      });
+
+      fun(); // Call the callback function after products are loaded
+      console.log('Products loaded successfully');
+    } catch (error) {
+      console.error('Error processing the product data:', error);
+    }
+  });
+
+  xhr.addEventListener('error', () => {
+    console.error('Network error: Unable to load products.');
+  });
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
 }
+
 loadProducts();
 
 /*
